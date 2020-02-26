@@ -1,18 +1,28 @@
-def get_user_input(): # keyword def with function name then ():
-    """Prompts the user for name, age and prints a message"""  # docstring
-    name = input("Please enter your name:")  # user input string
-    try:
-        age = int(input("Please enter your age:"))  # user input int, possible ValueError
-    except ValueError as err:
-        raise ValueError  # Seems silly, but later we can define custom exceptions!
-    else:
-        return name + " " + str(age) + " years old. "  # return statement, string concatenation
+def binomial_coeff(n, k):
+    """Compute the binomial coefficient for Pascal's Triangle"""
+    res = 1
+    if (k > n - k):
+        k = n - k
+    for i in range(0, k):
+        res = res * (n - i)
+        res = res // (i + 1)
 
+    return res
+
+
+def pascal_triangle(n):
+    """Print first n lines of Pascal's Triangle"""
+    # Iterate each line and print it
+    for line in range(0, n):
+        # Row (line) r has r elements
+        for i in range(0, line + 1):
+            print(binomial_coeff(line, i)," ", end="")
+        print()
 
 if __name__ == '__main__':
-    try:  # check for ValueError
-        display_string = get_user_input()  # function call, store in a variable
+    try:
+        n = int(input("Enter the number of rows to view of Pascal's Triangle:"))
     except ValueError as err:
-        print("ValueError encountered! ")
+        print("ValueError found!!")
     else:
-        print(display_string)  # print the result of the function
+        pascal_triangle(n)
