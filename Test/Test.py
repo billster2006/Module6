@@ -1,28 +1,18 @@
-def binomial_coeff(n, k):
-    """Compute the binomial coefficient for Pascal's Triangle"""
-    res = 1
-    if (k > n - k):
-        k = n - k
-    for i in range(0, k):
-        res = res * (n - i)
-        res = res // (i + 1)
+def ask_ok(prompt, retries=4, reminder='Please try again!'):
+    while True:
+        ok = input(prompt)
+        if ok in ('y', 'ye', 'yes'):
+            return True
+        if ok in ('n', 'no', 'nop', 'nope'):
+            return False
+        retries = retries - 1
+        if retries < 0:
+            raise ValueError('invalid user response')
+        print(reminder)
 
-    return res
-
-
-def pascal_triangle(n):
-    """Print first n lines of Pascal's Triangle"""
-    # Iterate each line and print it
-    for line in range(0, n):
-        # Row (line) r has r elements
-        for i in range(0, line + 1):
-            print(binomial_coeff(line, i)," ", end="")
-        print()
+        if retries < 0:
+                raise ValueError('invalid user response')
+            print(reminder)
 
 if __name__ == '__main__':
-    try:
-        n = int(input("Enter the number of rows to view of Pascal's Triangle:"))
-    except ValueError as err:
-        print("ValueError found!!")
-    else:
-        pascal_triangle(n)
+    ask_ok('Do you really want to quit?')
